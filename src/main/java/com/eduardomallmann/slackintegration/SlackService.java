@@ -116,4 +116,17 @@ public class SlackService {
             throw new Exception(e.getMessage());
         }
     }
+
+    public WebhookResponse sendWebhookBlockAlert(final AzureAlert azureAlert) throws Exception {
+        log.info("M=sendWebhookBlockAlert, message=Start sending alert: {}", azureAlert);
+        try {
+            return slack.send(slackProperties.getWebhook(), SlackMessageConverter.createPayload(azureAlert.getData()));
+        } catch (IOException e) {
+            log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
+            throw new Exception(e.getMessage());
+        } catch (Exception e) {
+            log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
+            throw new Exception(e.getMessage());
+        }
+    }
 }

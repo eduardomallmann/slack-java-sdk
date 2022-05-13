@@ -47,7 +47,15 @@ public class AppRestController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("webhook/block")
     public WebhookResponse postBlockWebhookMessage(@RequestBody final PlainTextMessage message) throws Exception {
-        log.info("M=postBlockWebhookMessage, message=Enter webhook/plain, message={}", message);
+        log.info("M=postBlockWebhookMessage, message=Enter webhook/block, message={}", message);
         return slackService.sendWebhookBlockMessage(message.getText());
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("webhook/block/alert")
+    public WebhookResponse postBlockWebhookAlert(@RequestBody final AzureAlert azureAlert) throws Exception {
+        log.info("M=postBlockWebhookAlert, message=Enter webhook/block/alert endpoint, alert={}", azureAlert);
+        return slackService.sendWebhookBlockAlert(azureAlert);
     }
 }

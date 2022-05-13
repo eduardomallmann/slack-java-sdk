@@ -28,9 +28,7 @@ public class SlackService {
     public ChatPostMessageResponse sendPlainPostMessage(final String channel, final String text) throws Exception {
         log.info("M=sendPlainPostMessage, message=Start sending message: {}", text);
         try {
-            ChatPostMessageResponse response = slack.methods(slackProperties.getToken()).chatPostMessage(req -> req
-                                                                                                                        .channel(channel)
-                                                                                                                        .text(text));
+            ChatPostMessageResponse response = slack.methods(slackProperties.getToken()).chatPostMessage(req -> req.channel(channel).text(text));
             if (response.isOk()) {
                 log.info("M=sendPlainPostMessage, message=Successful operation: {}", response.getMessage());
             } else {
@@ -129,4 +127,5 @@ public class SlackService {
             throw new Exception(e.getMessage());
         }
     }
+
 }

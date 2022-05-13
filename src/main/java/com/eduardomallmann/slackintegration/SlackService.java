@@ -81,9 +81,6 @@ public class SlackService {
         log.info("M=sendWebhookPlainMessage, message=Start sending message: {}", text);
         try {
             return slack.send(slackProperties.getWebhook(), payload(p -> p.text(":rotating_light::rotating_light:" + text)));
-        } catch (IOException e) {
-            log.error("M=sendPlainPostMessage, message=Exception thrown: {}", e.getMessage());
-            throw new Exception(e.getMessage());
         } catch (Exception e) {
             log.error("M=sendPlainPostMessage, message=Exception thrown: {}", e.getMessage());
             throw new Exception(e.getMessage());
@@ -106,9 +103,6 @@ public class SlackService {
                                                  section(section -> section.text(markdownText("*Service:* " + text)))
                                          ))
                     ));
-        } catch (IOException e) {
-            log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
-            throw new Exception(e.getMessage());
         } catch (Exception e) {
             log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
             throw new Exception(e.getMessage());
@@ -119,9 +113,6 @@ public class SlackService {
         log.info("M=sendWebhookBlockAlert, message=Start sending alert: {}", azureAlert);
         try {
             return slack.send(slackProperties.getWebhook(), SlackMessageConverter.createPayload(azureAlert.getData()));
-        } catch (IOException e) {
-            log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
-            throw new Exception(e.getMessage());
         } catch (Exception e) {
             log.error("M=sendWebhookBlockMessage, message=Exception thrown: {}", e.getMessage());
             throw new Exception(e.getMessage());
